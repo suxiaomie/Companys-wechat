@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    .head h1 {
+        /*text-align: center;*/
+    }
+
+    .main .main-left{
+        margin: 0  20px ;
+
+    }
+
+
+
+    .main .main-right, .main .main-left {
+        float: left;
+        width: 500px;
+        /*height: 400px;*/
+        /*background: yellow;*/
+    }
+
+    .database{
+        margin: 0 20px;
+    }
+
+    .main-left h1{
+        text-align: left;
+        font-size: 18px;
+    }
+
+    .main-right h1{
+        text-align: left;
+        font-size: 18px;
+    }
+
+    .dep-add{
+        text-align:justify;
+        text-justify:inter-ideograph;
+        text-align-last:justify;
+    }
+
+    .per-add{
+        text-align:justify;
+        text-justify:inter-ideograph;
+        text-align-last:justify;
+    }
+
+    .per-ser{
+        text-align:justify;
+        text-justify:inter-ideograph;
+        text-align-last:justify;
+    }
+
+    .database h1{
+        /*text-align: left;*/
+        font-size: 18px;
+    }
+
+    .table1{
+        border-top: 1px solid #999;
+        border-left: 1px solid #999;
+        border-spacing: 0;
+
+    }
+
+    .table1 td{
+        border-right: 1px solid #999;
+        border-bottom: 1px solid #999;
+    }
+
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息操作页面</title>
+</head>
+<body>
+<div class="row_1" >
+    <div class="head" style="background: #96b97d;"> <h1>企业微信通讯录同步</h1></div>
+    <div class="main">
+        <div class="main-left">
+            <h1>部门管理</h1>
+            <div class="main-left-content">
+                <h1>查询</h1>
+                <div>
+                    <label>查询所有部门信息</label>
+                    <input type="button" value="查询" onclick="GetAllDepartment()"/>
+                </div>
+                <div id="table_container"  ></div>
+
+                <h1>增加/更新</h1>
+                <div class="dep-add">
+                    <table>
+                        <tr><td>部门编号(更新必填)</td><td><input type="text" id="dep_id" name="bianhao" placeholder="请输入要插入/更新的部门编号" size="40"/></td></tr>
+                        <tr><td>部门名称(增加必填)</td><td><input type="text" id="name2" name="xingming" placeholder="请输入要插入/更新的部门姓名" size="40"/></td></tr>
+                        <tr><td>父部门编号(增加必填)</td><td><input type="text" id="parentid" name="parentid" placeholder="请输入要插入/更新的部门父部门 ID" size="40"/></td></tr>
+                        <tr><td>排序</td><td><input type="text" id="orders" name="order" placeholder="请输入要插入/更新的部门在父部门中的排序" size="40"/></td></tr>
+                        <tr><td>       <input type="button" value="添加" onclick="addDepartment()"/>
+                            <input type="button" value="更新" onclick="updateDepartment()"/></td></tr>
+                    </table>
+                </div>
+                <h1>删除</h1>
+                <p>部门编号<input type="text" id="de_depid" name="userid" placeholder="请输入要删除的部门编号" /></p>
+                <input type="button" value="删除" onclick="deleteDepartment()"/>
+            </div>
+
+        </div>
+        <div class="main-right">
+            <h1>人员管理</h1>
+            <div class="main-right-content">
+                <h1>查询</h1>
+                <div class="per-ser">
+                <table>
+                <div>
+
+                    <tr><td><label>通过工号查询信息</label></td><td>
+                     <input type="text" id="UserId" name="UserId" placeholder="请输入要查询人员的工号" />
+                        <input type="button" value="查询" onclick="queryByUserId()"/></td></tr>
+                    <tr><td> <label>通过部门编号查询成员信息</label></td><td>
+                    <input type="text" id="DepId" name="dep_id" placeholder="请输入要查询部门的编号" />
+                    <input type="button" value="简查" onclick="queryPersonByDepIdShort()"/>
+                    <input type="button" value="祥查" onclick="queryPersonByDepId()"/></td></tr>
+                </div>
+                </table>
+                    <div id="table_containers"></div>
+                </div>
+                </div>
+
+                <h1>增加/更新</h1>
+                <div class="per-add">
+                    <table>
+                        <tr><td>工号</td><td><input type="text" id="userids" name="gonghao" placeholder="请输入要插入/更新的员工工号" size="40"/></td></tr>
+                        <tr><td>姓名</td><td><input type="text" id="names" name="xingming" placeholder="请输入要插入/更新的员工姓名" size="40"/></td></tr>
+                        <tr><td>部门</td><td><input type="text" id="department" name="bumen" placeholder="请输入要插入/更新的员工所在部门" size="40"/></td></tr>
+                        <tr><td>电话</td><td><input type="text" id="mobile" name="tel" placeholder="请输入要插入/更新的员工电话" size="40"/></td></tr>
+                        <tr><td>邮箱</td><td><input type="text" id="email" name="youxiang" placeholder="请输入要插入/更新的员工邮箱" size="40"/></td></tr>
+                        <tr><td>职位</td><td><input type="text" id="position" name="zhiwei" placeholder="请输入要插入/更新的员工职位" size="40"/></td></tr>
+                        <tr><td>性别</td><td><input type="text" id="gender" name="sex" placeholder="请输入要插入/更新的员工性别" size="40"/></td></tr>
+                        <tr><td><input type="button" value="添加" onclick="addPerson()"/>
+                            <input type="button" value="更新" onclick="updatePerson()"/></td></tr>
+                    </table>
+                </div>
+                <h1>删除</h1>
+                <p>工号<input type="text" id="de_userid" name="userid" placeholder="请输入要删除的员工工号" /></p>
+                <input type="button" value="删除" onclick="deletePerson()"/>
+            </div>
+        </div>
+    </div>
+    <div class="database">
+    <h1>数据库同步</h1>
+    <input type="button" value="通讯录同步" onclick="putAllSql()"/>
+    </div>
+</div>
+
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+    /*********************员工操作**********************/
+    //通过工号查询信息    1
+    function queryByUserId(){
+        $.getJSON("/companys/get/"+document.getElementById("UserId").value,
+            function(data){
+                var html='<table class="table1">'
+                html+="<tr>";
+                html+="<td>工号</td>"
+                html+="<td>姓名</td>"
+                html+="<td>部门</td>"
+                html+="<td>手机号码</td>"
+                html+="<td>电子邮件</td>"
+                html+="<td>职务</td>"
+                html+="<td>性别</td>"
+                html+="</tr>";
+                html+="<tr>";
+                html+="<td>" + data.userid + "</td>"
+                html+="<td>" + data.name + "</td>"
+                html+="<td>" + data.department + "</td>"
+                html+="<td>" + data.mobile + "</td>"
+                html+="<td>" + data.email + "</td>"
+                html+="<td>" + data.position + "</td>"
+                html+="<td>" + data.gender + "</td>"
+                html+="</tr>";
+                html+='</table>';
+                $("#table_containers").html(html);
+            });
+    }
+
+    //通过部门 ID 查询成员信息_简 1
+    function queryPersonByDepIdShort(){
+        $.getJSON("/companys/getDepartmentPersonShort/"+document.getElementById("DepId").value,
+            function(data){
+                var html='<table class="table1">'
+                html+="<tr>";
+                html+="<td>工号</td>"
+                html+="<td>姓名</td>"
+                html+="<td>部门</td>"
+                html+="</tr>";
+                for (var i=0;i<data.length;i++){
+                html+="<tr>";
+                html+="<td>" + data[i].user_id + "</td>"
+                html+="<td>" + data[i].name + "</td>"
+                html+="<td>" + data[i].dep_id + "</td>"
+                html+="</tr>";
+                }
+                html+='</table>';
+                $("#table_containers").html(html);
+            });
+    }
+
+    //通过部门 ID 查询成员信息_祥  1
+    function queryPersonByDepId(){
+        $.getJSON("/companys/getDepartmentPerson/"+document.getElementById("DepId").value,
+            function(data){
+                var html='<table class="table1">'
+                html+="<tr>";
+                html+="<td>工号</td>"
+                html+="<td>姓名</td>"
+                html+="<td>部门</td>"
+                html+="<td>手机号码</td>"
+                html+="<td>电子邮件</td>"
+                html+="<td>职务</td>"
+                html+="<td>性别</td>"
+                html+="</tr>";
+                for (var i=0;i<data.length;i++){
+                    html+="<tr>";
+                    html+="<td>" + data[i].user_id + "</td>"
+                    html+="<td>" + data[i].name + "</td>"
+                    html+="<td>" + data[i].dep_id + "</td>"
+                    html+="<td>" + data[i].tel + "</td>"
+                    html+="<td>" + data[i].email + "</td>"
+                    html+="<td>" + data[i].position + "</td>"
+                    html+="<td>" + data[i].gender + "</td>"
+                    html+="</tr>";
+                }
+                html+='</table>';
+                $("#table_containers").html(html);
+            });
+    }
+
+    //添加信息 1
+    function addPerson(){
+        $.post("/companys/addPerson",{
+            user_id:document.getElementById("userids").value,
+            name:document.getElementById("names").value,
+            dep_id:document.getElementById("department").value,
+            tel:document.getElementById("mobile").value,
+            email:document.getElementById("email").value,
+            position:document.getElementById("position").value,
+            gender:document.getElementById("gender").value
+        },function(data,status){
+            alert("操作结果：" + data + "\n请求状态：" + status);
+        })
+    }
+
+    //更新信息   1
+    function updatePerson(){
+        $.post("/companys/updatePerson",{
+            user_id:document.getElementById("userids").value,
+            name:document.getElementById("names").value,
+            dep_id:document.getElementById("department").value,
+            tel:document.getElementById("mobile").value,
+            email:document.getElementById("email").value,
+            position:document.getElementById("position").value,
+            gender:document.getElementById("gender").value
+        },function(data,status){
+            alert("操作结果：" + data + "\n请求状态：" + status);
+        })
+    }
+
+    //删除信息  1
+    function deletePerson(){
+        $.get("/companys/deletePerson/"+ document.getElementById("de_userid").value,function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    }
+
+    /********************** 部门操作 *************************/
+
+    //添加信息 1
+    function addDepartment(){
+        $.post("/companys/addDepartment",{
+            dep_id:document.getElementById("dep_id").value,
+            name:document.getElementById("name2").value,
+            parent_id:document.getElementById("parentid").value,
+            order:document.getElementById("orders").value
+        },function(data,status){
+            alert("操作结果：" + data + "\n请求状态：" + status);
+        })
+    }
+    //更新信息  1
+    function updateDepartment(){
+        $.post("/companys/updateDepartment",{
+            dep_id:document.getElementById("dep_id").value,
+            name:document.getElementById("name2").value,
+            parent_id:document.getElementById("parentid").value,
+            order:document.getElementById("orders").value
+        },function(data,status){
+            alert("操作结果：" + data + "\n请求状态：" + status);
+        })
+    }
+
+    //删除信息  1
+    function deleteDepartment(){
+        $.get("/companys/deleteDepartment/"+ document.getElementById("de_depid").value,function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    }
+    //输出多个记录  1
+    function GetAllDepartment(){
+        $.getJSON("/companys/getDepartment",function(data){
+            var html='<table class="table1">'
+            html+="<tr>";
+            html+="<td>部门ID</td>"
+            html+="<td>名称</td>"
+            html+="<td>上级部门ID</td>"
+            html+="</tr>";
+            for (var i=0;i<data.length;i++){
+                html+="<tr>";
+                html+="<td>" + data[i].dep_id + "</td>"
+                html+="<td>" + data[i].name + "</td>"
+                html+="<td>" + data[i].parent_id + "</td>"
+                html+="</tr>";
+            }
+            html+='</table>';
+            $("#table_container").html(html);
+        });
+    }
+    
+    /*************************** 数据库操作 ********************************/
+    function putAllSql() {
+        $.get("/companys/covered",function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    }
+</script>
+</html>
